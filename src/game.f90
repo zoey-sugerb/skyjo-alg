@@ -26,7 +26,7 @@ contains
 
                 ! Above 0 numbers
                 do i = 1, 12
-                        deck(21 + i*10) = i
+                        deck(21 + i*10:30 + i*10) = i
                 end do
 
         end subroutine initGame

@@ -12,13 +12,11 @@ program main
         ! Prompt user for number of players and computers
         write(*, "(A)", advance="no") "Total number of players: "
         read(*,*) nPlayers
-        print *
         write(*, "(A)", advance="no") "Number of computer players: "
         read(*,*) nComp
 
         !! Start game
-        print *
-        write(*,"(A,1X, I0)") "Starting game with", nPlayers, "players and", nComp, "computers."
+        write(*,"(2(A,1X,I0,1X),A)") "Starting game with", nPlayers, "players and", nComp, "computers."
 
         !! Allocate state arrays to the right size
         allocate(visState(3,4,nPlayers))
