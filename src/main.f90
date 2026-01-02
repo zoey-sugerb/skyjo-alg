@@ -6,7 +6,7 @@ program main
         integer :: nPlayers, nComp
 
         ! Initialize deck and game states
-        integer, dimension(150) :: deck
+        integer, allocatable :: deck(:)
         integer, allocatable :: visState(:,:,:), hiddenState(:,:,:)
 
         ! Prompt user for number of players and computers
@@ -15,17 +15,21 @@ program main
         write(*, "(A)", advance="no") "Number of computer players: "
         read(*,*) nComp
 
-        !! Start game
+        ! Start game
         write(*,"(2(A,1X,I0,1X),A)") "Starting game with", nPlayers, "players and", nComp, "computers."
+        
+        ! Allocate deck to the right size
+        allocate(deck(150))
 
-        !! Allocate state arrays to the right size
+        ! Allocate state arrays to the right size
         allocate(visState(3,4,nPlayers))
         allocate(hiddenState(3,4,nPlayers))
 
-        !! Create deck and states
-        call initGame(deck, visState, hiddenState)
+        ! Create deck and states
+        call initGame(deck, nPlayers, visState, hiddenState)
         
-        !! Debug: print deck
-        print *, deck
-
+        ! Debug: print state
+        write(*,"(3(4(I0,', '), /))") hiddenState(:,:,1)
+        write(*,"(3(4(I0,', '), /))") visState(:,:,1)
+        print *, size(deck)
 end program main
