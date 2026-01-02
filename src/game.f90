@@ -1,7 +1,8 @@
 module skyjoGame
         implicit none
 
-        private ! All entities default module-private
+        private         ! All entities default module-private
+        public initGame ! Make subroutines public
 
 contains
         ! Initialize the game state; fill deck + visible and full game state arrays

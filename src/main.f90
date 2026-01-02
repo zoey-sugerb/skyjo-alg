@@ -10,15 +10,15 @@ program main
         integer, allocatable :: visState(:,:,:), hiddenState(:,:,:)
 
         ! Prompt user for number of players and computers
-        write(*, advance="no") "Total number of players: "
+        write(*, "(A)", advance="no") "Total number of players: "
         read(*,*) nPlayers
         print *
-        write(*, advance="no") "Number of computer players: "
+        write(*, "(A)", advance="no") "Number of computer players: "
         read(*,*) nComp
 
         !! Start game
         print *
-        write(*,*) "Starting game with ", nPlayers, " players, and ", nComp, " computers."
+        write(*,"(A,1X, I0)") "Starting game with", nPlayers, "players and", nComp, "computers."
 
         !! Allocate state arrays to the right size
         allocate(visState(3,4,nPlayers))
