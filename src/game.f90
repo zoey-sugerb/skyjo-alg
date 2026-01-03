@@ -9,7 +9,7 @@ contains
         subroutine initGame(deck, nPlayers, visState, hiddenState)
                 implicit none
                 
-                ! Loop indexes and card index
+                ! Loop indexes and card placeholder
                 integer :: i, j, k, n, c
                 
                 ! Player info
@@ -39,13 +39,8 @@ contains
                 do i = 1, nPlayers
                         do j = 1, 4
                                 do k = 1, 3
-                                        ! Choose a random card and place it in the current spot
-                                        call random_number(cFrac)
-                                        c = int((cFrac * (size(deck) - 1)) + 1)
-                                        hiddenState(k,j,i) = deck(c)
-                                        
-                                        ! Remove the card from the deck
-                                        deck = [deck(:c-1), deck(c+1:)]
+                                        call drawCard(deck, c)
+                                        hiddenState(k,j,i) = c
                                 end do
                         end do
                 end do
@@ -54,4 +49,29 @@ contains
                 visState(:,:,:) = -10
 
         end subroutine initGame
+        
+        ! Draw a card from the deck
+        subroutine drawCard(deck, card)
+                implicit none
+
+                ! Declare deck
+                integer, allocatable, intent(inout) :: deck(:)
+                
+                ! Declare card
+                integer, intent(out) :: card
+
+                ! Declare deck fraction and card number
+                integer :: c
+                real :: cFrac
+
+                ! Draw a random card
+                call random_number(cFrac)
+                c = int((cFrac * (size(deck) - 1)) + 1)
+                card = deck(c)
+
+                ! Remove that card from the deck
+                deck = [deck(:c-1), deck(c+1:)]
+                
+        end subroutine drawCard
+
 end module skyjoGame
