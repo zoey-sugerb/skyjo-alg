@@ -1,5 +1,6 @@
 program main
         use skyjoGame
+        use skyjoUI
         implicit none
         
         ! Initialize nubmer of players and computers
@@ -28,8 +29,6 @@ program main
         ! Create deck and states
         call initGame(deck, nPlayers, visState, hiddenState)
         
-        ! Debug: print state
-        write(*,"(3(4(I0,', '), /))") hiddenState(:,:,1)
-        write(*,"(3(4(I0,', '), /))") visState(:,:,1)
-        print *, size(deck)
+        ! Play turns
+        call humTurn(1, deck, visState, hiddenState)
 end program main
