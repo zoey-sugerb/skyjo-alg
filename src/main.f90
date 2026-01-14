@@ -7,7 +7,7 @@ program main
         integer :: nPlayers, nComp
 
         ! Initialize deck and game states
-        integer, allocatable :: deck(:)
+        integer, allocatable :: deck(:), discard(:)
         integer, allocatable :: visState(:,:,:), hiddenState(:,:,:)
 
         ! Prompt user for number of players and computers
@@ -27,7 +27,7 @@ program main
         allocate(hiddenState(3,4,nPlayers))
 
         ! Create deck and states
-        call initGame(deck, nPlayers, visState, hiddenState)
+        call initGame(deck, discard, nPlayers, visState, hiddenState)
         
         ! Play turns
         call humTurn(1, deck, visState, hiddenState)

@@ -24,6 +24,9 @@ contains
                 ! Draw hand
                 call writeHand(visState(:,:,pNum))
 
+                ! Prompt the player for their action
+                call turnPrompt()
+
         end subroutine humTurn
 
         ! Draw a visible hand array
@@ -62,4 +65,10 @@ contains
                 write(*,"(*(A2))") ((handStr(i,j), " ", j=1,5), new_line("A"), i=1, 4)
 
         end subroutine writeHand
+
+        ! Prompt the player for the actions they can take that turn
+        subroutine turnPrompt()
+                implicit none
+                write(*,"(A)") "Choose an action:", "    1. Flip over a card", "    2. Draw a card", "    3. Take card on discard", ">"
+        end subroutine turnPrompt
 end module skyjoUI

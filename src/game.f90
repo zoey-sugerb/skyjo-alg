@@ -6,7 +6,7 @@ module skyjoGame
 
 contains
         ! Initialize the game state; fill deck + visible and full game state arrays
-        subroutine initGame(deck, nPlayers, visState, hiddenState)
+        subroutine initGame(deck, discard, nPlayers, visState, hiddenState)
                 implicit none
                 
                 ! Loop indexes and card placeholder
@@ -19,7 +19,7 @@ contains
                 real :: cFrac
 
                 ! Initialize deck
-                integer, allocatable, intent(inout) :: deck(:)
+                integer, allocatable, intent(inout) :: deck(:), discard(:)
 
                 ! Initialize game state arrays
                 integer, allocatable, intent(inout):: visState(:,:,:), hiddenState(:,:,:)
@@ -73,5 +73,38 @@ contains
                 deck = [deck(:c-1), deck(c+1:)]
                 
         end subroutine drawCard
+        
+        ! Discard a card
+        subroutine discCard(discard, card)
+                implicit none
+
+                ! Declare discard
+                integer, allocatable, intent(inout) :: discard(:)
+
+                ! Declare card discarded
+                integer, intent(in) :: card
+
+                ! Add a card to the discard
+                discard(size(discard)+1) = card
+
+        end subroutine discCard
+
+        ! Pull a card from discard
+        subroutine pullDisc(discard)
+                implicit none
+
+                ! Declare discard
+                integer, allocatable, intent(inout) :: discard(:)
+
+                ! Declare card pulled
+                integer :: card
+
+                ! Pull the top card off
+                card = discard(size(discard))
+
+                ! Remove that card from the discard
+                discard = discard(:size(discard)-1)
+
+        end subroutine pullDisc
 
 end module skyjoGame
